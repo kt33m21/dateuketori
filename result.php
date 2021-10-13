@@ -1,10 +1,10 @@
 <?php
-
-$my_name=htmlspecialcharas($_POST['my_name'],ENT_QUOTES);
-$choices=htmlspecialchars($_POST['choices'],ENT_QUOTES);
-$number=htmlspecialchars($POST['number'],ENT_QUOTES);
+session_start();
 ?>
+<html>
 
-<p>私の名前は、<?php echo $my_name;?></p>
-<p>ご希望商品は、<?php echo  $choices;?><p>
-<p>注文数は、<?php echo $number;?></p>
+<body>
+  <p>再びセッション開始</p>
+  <p>受け取ったセッション変数の値は<?php print $_SESSION["language"] ?>です</p>
+  <p><a href="session_destroy.php">セッションを破棄</a>する<p>
+</body>

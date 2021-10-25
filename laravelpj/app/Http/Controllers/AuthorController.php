@@ -9,7 +9,7 @@ class AuthorController extends Controller
 {
     public function index()
     {
-        $items = DB::select('select * from authors');
+        $items = DB::table('authors')->get();
         return view('index', ['items' => $items]);
     }
     public function add()
@@ -23,7 +23,34 @@ class AuthorController extends Controller
             'age' => $request->age,
             'nationality' => $request->nationality,
         ];
-        DB::insert('insert into authors (name, age, nationality) values (:name, :age, :nationality)', $param);
+        DB::table('authors')->insert($param);
+        return redirect('/');
+    }
+    public function edit(Request $request)
+    {
+        $item = DB::table('authors')->where('id', $request->id)->first();
+        return view('edit', ['form' => $item]);
+    }
+    public function update(Request $request)
+    {
+        $param = [
+            'id' => $request->id,
+            'name' => $request->name,
+            'age' => $request->age,
+            'nationality' => $request->nationality,
+        ];
+        DB::table('authors')->where('id', $request->id)->update($param);
+        return redirect('/');
+    }
+    public function delete(Request $request)
+    {
+        $item = DB::table('authors')->where('id', $request->id)->first();
+        return view('delete', ['form' => $item]);
+    }
+    public function remove(Request $request)
+    {
+        $param = ['id' => $request->id];
+        DB::table('authors')->where('id', $request->id)->delete();
         return redirect('/');
     }
 }

@@ -2,31 +2,33 @@
 <style>
   th{
     background-color: #289ADC;
-    color:white;
+    color: white;
     padding: 5px 40px;
   }
-  tr:nth-child(odd) td{
-    background-color: #FFFFFF;
-  }
   td{
-    padding: 25px 40px;
+    padding:25px 40px;
     background-color: #EEEEEE;
-    text-align:center;
+    text-align: center;
   }
 </style>
-@section('title','idex.blade.php')
+@section('title' , 'find.blade.php')
 
 @section('content')
+<form action = "find" method="POST">
+  @csrf
+  <input type="text" name="input" value="{{$input}}">
+  <input type="submit" value="見つける">
+</form>
+@if (@isset($item))
 <table>
   <tr>
     <th>Data</th>
   </tr>
-  @foreach ($items as $item)
   <tr>
     <td>
       {{$item->getDetail()}}
     </td>
   </tr>
-  @endforeach
 </table>
+@endif
 @endsection

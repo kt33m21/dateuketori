@@ -17,6 +17,7 @@ class CreateAuthorsTable extends Migration
             $table->id();
             $table->string('name' ,100);
             $table->integer('age');
+            $table->string('nationality', 100);
             $table->timestamp('create_at')->useCurrent()->nullable();
             $table->timestamp('update_at')->useCurrent()->nullable();
         });

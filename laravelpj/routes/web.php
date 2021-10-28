@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,14 +13,12 @@ use App\Http\Controllers\AuthorController;
 |
 */
 
-Route::get('/', [AuthorController::class, 'index']);
-Route::get('/find',[AuthorController::class, 'find']);
-Route::post('/find',[AuthorController::class,'search']);
-Route::get('/author/{author}', [AuthorController::class, 'bind']);
+Route::get('/', function () {
+    return view('welcome');
+});
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-
-
-
-
-
+require __DIR__.'/auth.php';

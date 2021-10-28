@@ -1,6 +1,6 @@
 @extends('layouts.default')
 <style>
-    th {
+  th {
       background-color: #289ADC;
       color: white;
       padding: 5px 40px;
@@ -13,25 +13,35 @@
       background-color: #EEEEEE;
       text-align: center;
     }
-    svg.w-5.h-5 {  /*paginateメソッドの矢印の大きさ調整のために追加*/
-    width: 30px;
-    height: 30px;
+    td table tbody tr td {
+      background-color:#EEEEEE !important;
     }
 </style>
-@section('title', 'index.blade.php')
+@section('title', 'author.index.blade.php')
 
 @section('content')
 <table>
   <tr>
-    <th>Data</th>
+    <th>Author</th>
+    <th>Book</th>
   </tr>
   @foreach ($items as $item)
   <tr>
     <td>
       {{$item->getDetail()}}
     </td>
+    <td>
+      @if ($item->books != null)
+        <table width="100%">
+          @foreach ($item->books as $obj)
+            <tr>
+              <td>{{ $obj->getTitle() }}</td>
+            </tr>
+          @endforeach
+        </table>
+      @endif
+    </td>
   </tr>
   @endforeach
 </table>
-{{ $items->links() }}
 @endsection
